@@ -1,1 +1,3 @@
-# Pomodoro_Timer
+# Pomodoro Timer
+
+React Pomodoro timer 
