@@ -20,29 +20,30 @@ function Timer() {
 	const modeRef = useRef(mode);
 
 
-	
+	function tick() {
+		secondsLeftRef.current = secondsLeftRef.current -1;
+		setSecondsLeft(secondsLeftRef.current);
+	}
+
+	useEffect(() => {
 	
 	function switchMode() {
-		const nextMode = modeRef.current === 'study' ? 'break' : 'work';
+		const nextMode = modeRef.current === 'study' ? 'break' : 'study';
 		const nextSeconds =(nextMode === 'study' ? settingsInfo.studyMinutes : settingsInfo.breakMinutes) * 60;
 
-		setMode(nextModeRef);
+		setMode(nextMode);
 		modeRef.current = nextMode;
 
 		setSecondsLeft(nextSeconds);
 		secondsLeftRef.c= nextSeconds;
 
-	function tick() {
-		secondsLeftRef.current = secondsLeftRef.current -1;
-		setSecondsLeft(secondsLeftRef.current);
 	}
 
 	function initTimer() {
 		setSecondsLeft(settingsInfo.studyMinutes * 60);
 	}
 
-	useEffect(() => {
-		initTimer();
+
 
 		const interval = setInterval(() => {
 			if (isPausedRef.current){
@@ -54,7 +55,7 @@ function Timer() {
 			tick();
 		},1000);
 
-		return() => clearinterval(interval);
+		return() => clearInterval(interval);
 	}, [settingsInfo]);
 
 	const totalSeconds = mode === 'study'

@@ -18,9 +18,10 @@ main {
 }
 
 button {
-  background-color: transparent;
+  background-color: #2196F3;
   color: black;
   border: 0;
+  border-radius: 10px;
   display: inline-block;
   width: 100px;
   cursor: pointer;
