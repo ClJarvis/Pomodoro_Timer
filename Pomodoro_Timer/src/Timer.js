@@ -29,18 +29,19 @@ function Timer() {
 	
 	function switchMode() {
 		const nextMode = modeRef.current === 'study' ? 'break' : 'study';
-		const nextSeconds =(nextMode === 'study' ? settingsInfo.studyMinutes : settingsInfo.breakMinutes) * 60;
+		const nextSeconds = (nextMode === 'study' ? settingsInfo.studyMinutes : settingsInfo.breakMinutes) * 60;
 
 		setMode(nextMode);
 		modeRef.current = nextMode;
 
 		setSecondsLeft(nextSeconds);
-		secondsLeftRef.c= nextSeconds;
+		secondsLeftRef.current = nextSeconds;
 
 	}
 
 	function initTimer() {
 		setSecondsLeft(settingsInfo.studyMinutes * 60);
+		setSecondsLeft(secondsLeft.current);
 	}
 
 
@@ -64,7 +65,7 @@ function Timer() {
 	const percentage = Math.round(secondsLeft / totalSeconds * 100);
 	const minutes = Math.floor(secondsLeft / 60);
 	let seconds = secondsLeft % 60;
-	if(seconds < 10) seconds = '0' + seconds; 
+	if(seconds < 10) seconds = '0' +seconds; 
 
 	return (
 		<div>
